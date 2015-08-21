@@ -9,6 +9,7 @@ class CardsController < ApplicationController
 		else
 			@card = Card.create(card_params)
 		end
+
 		respond_to do |format|
 			format.json { render :json =>  @card, :except=>  [:created_at, :updated_at] }
 		end
