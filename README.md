@@ -42,17 +42,23 @@ Once the issue is resolved, it would be best to continue to monitor the network.
 
 We have a mysql cluster (master ­> slave) running low on disk space. There is a proper clustering solution (VIP) in place and clients are smart enough to reconnect upon disconnects. What are the options to increase disk capacity without compromising uptime?
 
+Answer:
+
 If we are using a simple RAID drive then we can build a new partition without downtime but if not we can install new disk space and point the data directory there. Then we can migrate data to alleviate space issues on the other drive.  Both options are capable without downtime.
 
 ## 3
 
 You are tasked with managing a log of user­generated events. Each event is represented as a simple ~1KB JSON object, which includes a timestamp and a user_id. Currently, the events take 1TB of disk space and they are growing at a rate of 1,000 events per second. Each user can generate thousands of events. How would you design a low maintenance system to allow for quick retrieval (<10ms) of a single user’s last 100 events at a rate of 100 ops/sec ?
 
+Answer:
+
 
 As events are created, I would create a cache of the events and run a task every "x" seconds to ensure that previous tasks are archived.
 
 ## 4
 Imagine a massively multiplayer RPG. The most popular feature is a battle arena. When a user enters the arena, a list of 10 other users are presented based on certain conditions. Most importantly, the list must have users within a similar hero level (level), and they also must be alive (health>0). Note: the health value changes frequently. How would you store this information to ensure 10 ms response times even with 10 million user rows and 10,000 players online at any given time?
+
+Answer:
 
 
 I would parse through the data and pass them into variables and do multi-line entries. Then run corresponding update methods on the json objects.
@@ -62,6 +68,8 @@ I would parse through the data and pass them into variables and do multi-line en
 The following SQL query works fine, however it poses a serious performance issue. What is the issue and how can we speed it up?
 
 SELECT id FROM users WHERE LOWER(email)='lucas@uken.com';
+
+Answer:
 
 The query will return the id which will then allow us to map back to the rest of the data although that would be a 2 step process.  You can exchange id with * and it should return the entire row.
 
