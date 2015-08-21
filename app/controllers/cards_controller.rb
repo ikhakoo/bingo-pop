@@ -3,7 +3,6 @@ class CardsController < ApplicationController
 	def deal
 		if params[:cards]
 			@cards = params[:cards].to_i
-			@card = []
 			@cards.times do
 				@card = @card, Card.create(card_params)
 			end
@@ -11,7 +10,7 @@ class CardsController < ApplicationController
 			@card = Card.create(card_params)
 		end
 		respond_to do |format|
-			format.json { render :json =>  @card }
+			format.json { render :json =>  @card, :except=>  [:created_at, :updated_at] }
 		end
 	end
 		
@@ -32,7 +31,22 @@ class CardsController < ApplicationController
 		col4 = col4.sample(5).sort
 		col5 = col5.sample(5).sort
 
-		cols = col1, col2, col3, col4, col5
+		col1hash = Hash.new
+		col1hash[:B] = col1
+
+		col2hash = Hash.new
+		col2hash[:I] = col2
+
+		col3hash = Hash.new
+		col3hash[:N] = col3
+
+		col4hash = Hash.new
+		col4hash[:G] = col4
+
+		col5hash = Hash.new
+		col5hash[:O] = col5
+
+		cols = col1hash, col2hash, col3hash, col4hash, col5hash
 
 		colshash = Hash.new
 		colshash[:columns] = cols
